@@ -81,7 +81,14 @@ clean()
 GITDIR=.git
 
 if [ "$1" = "--help" ]; then
-  echo "git share [remotehost] [remoteport] [localport]"
+  echo "usage: git share [remotehost] [remoteport] [localport]"
+  echo
+  echo "Example: git share myhost.com 55555"
+  echo
+  echo "git config:"
+  echo "\tshare.remotehost"
+  echo "\tshare.remoteport"
+  echo "\tshare.localport"
   exit
 fi
 
