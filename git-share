@@ -129,6 +129,6 @@ setup_git_daemon $GITDIR $LOCALPORT
 setup_ssh $REMOTEHOST $REMOTEPORT $LOCALPORT
 
 
-echo You can now clone at git://localhost:50423/share
+echo You can now clone at git://$REMOTEHOST:$REMOTEPORT/share
 while [ 1 ]; do sleep 1d; done
 
