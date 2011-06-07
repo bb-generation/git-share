@@ -76,12 +76,50 @@ clean()
   exit
 }
 
+
+
+GITDIR=.git
+
+if [ "$1" = "--help" ]; then
+  echo "git share [remotehost] [remoteport] [localport]"
+  exit
+fi
+
+if [ ! -d $GITDIR ]; then
+  echo You need to run this command from the toplevel of the working tree.
+  exit 1
+fi
+
+if [ $# -gt 0 ]; then
+  REMOTEHOST=$1
+elif [ "`git config --get share.remotehost`" != "" ]; then
+  REMOTEHOST=`git config --get share.remotehost`
+else
+  REMOTEHOST=localhost
+fi
+
+if [ $# -gt 1 ]; then
+  REMOTEPORT=$2
+elif [ "`git config --get share.remoteport`" != "" ]; then
+  REMOTEPORT=`git config --get share.remoteport`
+else
+  REMOTEPORT=50423
+fi
+
+if [ $# -gt 2 ]; then
+  LOCALPORT=$3
+elif [ "`git config --get share.localport`" != "" ]; then
+  LOCALPORT=`git config --get share.localport`
+else
+  LOCALPORT=9418
+fi
+
 trap "clean" INT
 
-setup_git_share .git
-setup_remote .git
-setup_git_daemon .git 9418
-setup_ssh localhost 50423 9418
+setup_git_share $GITDIR
+setup_remote $GITDIR
+setup_git_daemon $GITDIR $LOCALPORT
+setup_ssh $REMOTEHOST $REMOTEPORT $LOCALPORT
 
 
 echo You can now clone at git://localhost:50423/share
