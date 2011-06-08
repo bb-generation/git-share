@@ -49,7 +49,7 @@ setup_ssh()
   DESTINATION=$1
   REMOTEPORT=$2
   LOCALPORT=$3
-  ssh $DESTINATION -R $REMOTEPORT:localhost:$LOCALPORT -n -f sleep 365d
+  ssh $DESTINATION -R *:$REMOTEPORT:localhost:$LOCALPORT -n -f sleep 365d
   SSHDPID=`pgrep -n ssh`
 }
 
@@ -130,5 +130,6 @@ setup_ssh $REMOTEHOST $REMOTEPORT $LOCALPORT
 
 
 echo You can now clone at git://$REMOTEHOST:$REMOTEPORT/share
+echo Stop by pressing Ctrl-C
 while [ 1 ]; do sleep 1d; done
 
