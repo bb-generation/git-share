@@ -1,0 +1,77 @@
+git-share
+=========
+A simple script to set up a git daemon and share it on a remote server.
+
+Preconditions
+-------------
+1. Linux server with OpenSSH server running
+2. Right to forward ports to that server (*GatewayPorts yes*)
+3. OpenSSH ssh client on the client machine 
+
+What it does
+------------
+*git share* does a couple of things
+1. It creats a bare repository to share
+2. It starts a git daemon so everyone can pull and push from your bare
+	 repository
+3. It forwards a port on a remote machine to your local client
+4. It adds a new remote called *share* to your git repository (pointing to the
+	 bare repository)
+
+So after typing *git share* anybody can pull and push to your bare repository
+and you can pull and push to it.
+
+You can stop *git share* by pressing Ctrl-C.
+
+Quick Howto
+-----------
+*Remote host:* example-server.com
+
+User A:
+```bash
+$ git config --all share.remotehost example-server.com
+$ git share
+Cloning into bare repository .git/share/share...
+done.
+Password: [enter password]
+You can now clone at git://example-server.com:50423/share
+Stop by pressing Ctrl-C
+```
+
+Another User B (somewhere else):
+```bash
+$ git clone git://example-server.com:50423/share
+Cloning into share...
+remote: Counting objects: 3, done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Receiving objects: 100% (3/3), done.
+$ [... do some work ...]
+$ git push origin
+```
+
+User A again:
+```bash
+$ git pull share master
+[... pulling stuff that User B has pushed before ...]
+```
+
+Installing git-share
+--------------------
+```bash
+$ git clone https://bb-generation@github.com/bb-generation/git-share.git
+$ cd git-share
+$ sudo make install
+```
+
+License
+-------
+git-share is licensed under the terms of the zlib license.
+
+flattr
+------
+Please flattr me to show your support
+[![Flattr this][2]][1]
+
+[1]: https://flattr.com/thing/302899/git-share
+[2]: http://api.flattr.com/button/button-static-50x60.png
+
