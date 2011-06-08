@@ -27,7 +27,8 @@ Quick Howto
 -----------
 *Remote host:* example-server.com
 
-User A:
+*User A:*
+
 ```bash
 $ git config --all share.remotehost example-server.com
 $ git share
@@ -38,7 +39,8 @@ You can now clone at git://example-server.com:50423/share
 Stop by pressing Ctrl-C
 ```
 
-Another User B (somewhere else):
+*Another User B (somewhere else):*
+
 ```bash
 $ git clone git://example-server.com:50423/share
 Cloning into share...
@@ -49,7 +51,8 @@ $ [... do some work ...]
 $ git push origin
 ```
 
-User A again:
+*User A again:*
+
 ```bash
 $ git pull share master
 [... pulling stuff that User B has pushed before ...]
@@ -57,6 +60,7 @@ $ git pull share master
 
 Installing git-share
 --------------------
+
 ```bash
 $ git clone https://bb-generation@github.com/bb-generation/git-share.git
 $ cd git-share
@@ -70,6 +74,7 @@ git-share is licensed under the terms of the zlib license.
 flattr
 ------
 Please flattr me to show your support
+
 [![Flattr this][2]][1]
 
 [1]: https://flattr.com/thing/302899/git-share
